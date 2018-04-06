@@ -10,11 +10,13 @@ red = Color(0xFF0000,1)
 orange = Color(0xFFA500,1)
 yellow = Color(0xFFFF00,1)
 green = Color(0x00FF00,1)
+cyan = Color(0x00FFFF,1)
 blue = Color(0x0000FF,1)
-violet = 
+violet = Color(0x800080,1)
 pink = Color(0xFF00FF,1)
 white = Color(0xFFFFFF,1)
 black = Color(0x000000,1)
+grey = Color(0xF2F2F2,1)
 outline = LineStyle(2,black)
 
 def pickCode():
@@ -30,21 +32,26 @@ def turnColor(color):
 
 def turnRed(event):
     turnColor(red)
-    data['guess'] += '1'
+    data['guess'] += '0'
     if data['guesses']%4 == 0:
             checkAnswer(data['guess'])
 def turnOrange(event):
     turnColor(orange)
-    data['guess'] += '2'
+    data['guess'] += '1'
     if data['guesses']%4 == 0:
             checkAnswer(data['guess'])
 def turnYellow(event):
     turnColor(yellow)
-    data['guess'] += '3'
+    data['guess'] += '2'
     if data['guesses']%4 == 0:
             checkAnswer(data['guess'])
 def turnGreen(event):
     turnColor(green)
+    data['guess'] += '3'
+    if data['guesses']%4 == 0:
+            checkAnswer(data['guess'])
+def turnCyan(event):
+    turnColor(cyan)
     data['guess'] += '4'
     if data['guesses']%4 == 0:
             checkAnswer(data['guess'])
@@ -55,22 +62,52 @@ def turnBlue(event):
             checkAnswer(data['guess'])
 def turnPink(event):
     turnColor(pink)
-    data['guess'] + '6'
+    data['guess'] += '6'
+    if data['guesses']%4 == 0:
+            checkAnswer(data['guess'])
+def turnViolet(event):
+    turnColor(violet)
+    data['guess'] += '7'
+    if data['guesses']%4 == 0:
+            checkAnswer(data['guess'])
+def turnWhite(event):
+    turnColor(white)
+    data['guess'] += '8'
+    if data['guesses']%4 == 0:
+            checkAnswer(data['guess'])
+def turnDark(event):
+    turnColor(black)
+    data['guess'] += '9'
     if data['guesses']%4 == 0:
             checkAnswer(data['guess'])
 
-
 def checkAnswer(answer):
     print(data['guess'])
+    print('bulls:',checkBulls(data['guess']))
+    print('cows:',checkCows(data['guess'])
     data['guess'] = ''
+
+def checkBulls(answer):
+    bulls = 0
+    for ch in data['code']:
+        for j in data['guess']
+            
+    
+def checkCows(answer):
+    cows = 0
+    for ch in data['guess']:
+        if ch in data['code']
+            cows += 1
+    return cows - bulls
     
 
 if __name__ == '__main__':
     data = {}
+    data['code'] = pickCode()
     data['guesses'] = 0
     data['guess'] = ""
     
-    emptyCircle = CircleAsset(20,outline,white)
+    emptyCircle = CircleAsset(20,outline,grey)
     
     #guessing grid
     circlex = 0
@@ -83,11 +120,12 @@ if __name__ == '__main__':
     App().listenKeyEvent('keydown','o',turnOrange)
     App().listenKeyEvent('keydown','y',turnYellow)
     App().listenKeyEvent('keydown','g',turnGreen)
+    App().listenKeyEvent('keydown','c',turnCyan)
     App().listenKeyEvent('keydown','b',turnBlue)
     App().listenKeyEvent('keydown','p',turnPink)
     App().listenKeyEvent('keydown','v',turnViolet)
     App().listenKeyEvent('keydown','w',turnWhite)
-    
+    App().listenKeyEvent('keydown','d',turnDark)
     
     App().run()
     
