@@ -84,21 +84,23 @@ def turnDark(event):
 def checkAnswer(answer):
     print(data['guess'])
     print('bulls:',checkBulls(data['guess']))
-    print('cows:',checkCows(data['guess'])
+    print('cows:',checkCows(data['guess']))
     data['guess'] = ''
 
 def checkBulls(answer):
     bulls = 0
     for ch in data['code']:
-        for j in data['guess']
-            
+        for j in data['guess']:
+            if ch == j:
+                bulls += 1
+    return bulls
     
 def checkCows(answer):
     cows = 0
     for ch in data['guess']:
-        if ch in data['code']
+        if ch in data['code']:
             cows += 1
-    return cows - bulls
+    return cows - checkBulls(data['guess'])
     
 
 if __name__ == '__main__':
@@ -107,6 +109,7 @@ if __name__ == '__main__':
     data['guesses'] = 0
     data['guess'] = ""
     
+    print(data['code'])
     emptyCircle = CircleAsset(20,outline,grey)
     
     #guessing grid
