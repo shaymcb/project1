@@ -89,10 +89,9 @@ def checkAnswer(answer):
 
 def checkBulls(answer):
     bulls = 0
-    for ch in data['code']:
-        for j in data['guess']:
-            if ch == j:
-                bulls += 1
+    for i in range(4):
+        if data['code'][i] == data['guess'][i]:
+            bulls += 1
     return bulls
     
 def checkCows(answer):
