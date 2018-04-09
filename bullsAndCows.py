@@ -5,6 +5,10 @@
 from ggame import *
 from random import randint
 
+RADIUS = 20
+ATTEMPTS = 10
+
+
 #colors
 red = Color(0xFF0000,1)
 orange = Color(0xFFA500,1)
@@ -26,7 +30,7 @@ def pickCode():
 
 def turnColor(color):
     Circle = CircleAsset(20,outline,color)
-    if data['guesses'] <= 40:
+    if data['guesses'] <= 4 * ATTEMPTS:
         Sprite(Circle,((data['guesses'] - data['guesses']//4 * 4)*45, data['guesses']//4 * 45))
         data['guesses'] += 1
 
@@ -128,17 +132,16 @@ if __name__ == '__main__':
     data['code'] = data['code1']+data['code2']+data['code3']+data['code4']
     data['guesses'] = 0
     data['guess'] = ""
-    data['bulls'] = 0
     
     print(data['code'])
-    emptyCircle = CircleAsset(20,outline,grey)
+    emptyCircle = CircleAsset(RADIUS,outline,grey)
     
     #guessing grid
     circlex = 0
     circley = 0
-    for i in range(10):
+    for i in range(ATTEMPTS):
         for j in range(4):
-            Sprite(emptyCircle,(circlex + j*45,circley + i*45))
+            Sprite(emptyCircle,(circlex + j*(2*RADIUS+5),circley + i*(2*RADIUS+5)))
     
     App().listenKeyEvent('keydown','r',turnRed)
     App().listenKeyEvent('keydown','o',turnOrange)
