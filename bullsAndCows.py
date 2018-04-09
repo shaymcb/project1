@@ -83,30 +83,52 @@ def turnDark(event):
 
 def checkAnswer(answer):
     print(data['guess'])
-    print('bulls:',checkBulls(data['guess']))
-    print('cows:',checkCows(data['guess']))
+    if checkBulls(data['guess']) == 4:
+        print("YOU WIN!")
+    else:
+        print('bulls:',checkBulls(data['guess']))
+        print('cows:',checkCows(data['guess']))
     data['guess'] = ''
 
 def checkBulls(answer):
     bulls = 0
-    for i in range(4):
-        if data['code'][i] == data['guess'][i]:
-            bulls += 1
+    i = 0
+    for ch in data['guess']:
+        i += 1
+        if i == 1:
+            if ch == data['code1']:
+                bulls += 1
+        elif i == 2:
+            if ch == data['code2']:
+                bulls+=1
+        elif i == 3:
+            if ch == data['code3']:
+                bulls+=1
+        else:
+            if ch == data['code4']:
+                bulls+=1
     return bulls
     
 def checkCows(answer):
     cows = 0
+    match = ''
     for ch in data['guess']:
-        if ch in data['code']:
+        if ch in data['code'] and ch not in match:
             cows += 1
+            match = match + ch
     return cows - checkBulls(data['guess'])
     
 
 if __name__ == '__main__':
     data = {}
-    data['code'] = pickCode()
+    data['code1'] = str(randint(0,9))
+    data['code2'] = str(randint(0,9))
+    data['code3'] = str(randint(0,9))
+    data['code4'] = str(randint(0,9))
+    data['code'] = data['code1']+data['code2']+data['code3']+data['code4']
     data['guesses'] = 0
     data['guess'] = ""
+    data['bulls'] = 0
     
     print(data['code'])
     emptyCircle = CircleAsset(20,outline,grey)
