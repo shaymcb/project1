@@ -32,10 +32,16 @@ def pickCode():
     while pick2 == pick1:
         pick2 = randint(0,9)
     while pick3 == pick1 or pick3 == pick2:
-        thirdPick = randint(0,9)
-    while pick4 == pick1 or pick4 == pick2 or pick4 == pick3
+        pick3 = randint(0,9)
+    while pick4 == pick1 or pick4 == pick2 or pick4 == pick3:
+        pick4 = randint(0,9)
     
-    return firstDigit+otherDigits
+    data['code1'] = str(pick1)
+    data['code2'] = str(pick2)
+    data['code3'] = str(pick3)
+    data['code4'] = str(pick4)
+    
+    return data['code1'] + data['code2'] + data['code3'] + data['code4']
 
 def turnColor(color):
     Circle = CircleAsset(20,outline,color)
@@ -134,11 +140,11 @@ def checkCows(answer):
 
 if __name__ == '__main__':
     data = {}
-    data['code1'] = str(randint(0,9))
-    data['code2'] = str(randint(0,9))
-    data['code3'] = str(randint(0,9))
-    data['code4'] = str(randint(0,9))
-    data['code'] = data['code1']+data['code2']+data['code3']+data['code4']
+    data['code1'] = ''
+    data['code2'] = ''
+    data['code3'] = ''
+    data['code4'] = ''
+    data['code'] = pickCode()
     data['guesses'] = 0
     data['guess'] = ""
     
