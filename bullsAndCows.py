@@ -8,7 +8,6 @@ from random import randint
 RADIUS = 20
 ATTEMPTS = 10
 
-
 #colors
 red = Color(0xFF0000,1)
 orange = Color(0xFFA500,1)
@@ -101,12 +100,14 @@ def turnDark(event):
             checkAnswer(data['guess'])
 
 def checkAnswer(answer):
-    print(data['guess'])
     if checkBulls(data['guess']) == 4:
         print("YOU WIN!")
     else:
-        print('bulls:',checkBulls(data['guess']))
-        print('cows:',checkCows(data['guess']))
+        bulls = checkBulls(data['guess'])
+        cows = checkCows(data['guess'])
+        scoreBox = TextAsset('Bulls = '+str(bulls)+' , Cows = '+str(cows))
+        
+        Sprite(scoreBox,(data[
     data['guess'] = ''
 
 def checkBulls(answer):
@@ -148,9 +149,9 @@ if __name__ == '__main__':
     data['guesses'] = 0
     data['guess'] = ""
     
-    print(data['code'])
     emptyCircle = CircleAsset(RADIUS,outline,grey)
     key = TextAsset('Colors = r, o, y, g, c, b, p, v, w, d')
+    scoreBox = TextAsset('0 Bulls, 0 Cows')
     
     #guessing grid
     circlex = 0
@@ -158,6 +159,8 @@ if __name__ == '__main__':
     for i in range(ATTEMPTS):
         for j in range(4):
             Sprite(emptyCircle,(circlex + j*(2*RADIUS+5),circley + i*(2*RADIUS+5)))
+    
+    Sprite(key,(0,450))
     
     App().listenKeyEvent('keydown','r',turnRed)
     App().listenKeyEvent('keydown','o',turnOrange)
