@@ -107,7 +107,7 @@ def checkAnswer(answer):
         cows = checkCows(data['guess'])
         scoreBox = TextAsset('Bulls = '+str(bulls)+' , Cows = '+str(cows))
         
-        Sprite(scoreBox,(data[
+        Sprite(scoreBox,(RADIUS*8 + 25, data['guesses']/4))
     data['guess'] = ''
 
 def checkBulls(answer):
