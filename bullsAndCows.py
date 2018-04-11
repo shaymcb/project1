@@ -101,13 +101,13 @@ def turnDark(event):
 
 def checkAnswer(answer):
     if checkBulls(data['guess']) == 4:
-        Sprite(winBox)
+        Sprite(winBox,(RADIUS*8 + 25, (data['guesses']/4-1)*(RADIUS*2+5)))
     else:
         bulls = checkBulls(data['guess'])
         cows = checkCows(data['guess'])
         scoreBox = TextAsset('Bulls = '+str(bulls)+' , Cows = '+str(cows))
-        
         Sprite(scoreBox,(RADIUS*8 + 25, (data['guesses']/4-1)*(RADIUS*2+5)))
+    
     data['guess'] = ''
 
 def checkBulls(answer):
@@ -152,7 +152,7 @@ if __name__ == '__main__':
     emptyCircle = CircleAsset(RADIUS,outline,grey)
     key = TextAsset('Colors = r, o, y, g, c, b, p, v, w, d')
     scoreBox = TextAsset('0 Bulls, 0 Cows')
-    winBox = TextAsset('YOU WIN!!!',style = 'bold 40pt')
+    winBox = TextAsset('YOU WIN!!!',style = 'bold 40pt Times')
     
     #guessing grid
     circlex = 0
