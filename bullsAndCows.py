@@ -24,8 +24,17 @@ grey = Color(0xF2F2F2,1)
 outline = LineStyle(2,black)
 
 def pickCode():
-    firstDigit = str(randint(0,9))
-    otherDigits = str(randint(100,999))
+    pick1 = randint(0,9)
+    pick2 = randint(0,9)
+    pick3 = randint(0,9)
+    pick4 = randint(0,9)
+    
+    while pick2 == pick1:
+        pick2 = randint(0,9)
+    while pick3 == pick1 or pick3 == pick2:
+        thirdPick = randint(0,9)
+    while pick4 == pick1 or pick4 == pick2 or pick4 == pick3
+    
     return firstDigit+otherDigits
 
 def turnColor(color):
@@ -135,6 +144,7 @@ if __name__ == '__main__':
     
     print(data['code'])
     emptyCircle = CircleAsset(RADIUS,outline,grey)
+    key = TextAsset('Colors = r, o, y, g, c, b, p, v, w, d')
     
     #guessing grid
     circlex = 0
