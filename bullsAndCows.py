@@ -107,7 +107,7 @@ def checkAnswer(answer):
         cows = checkCows(data['guess'])
         scoreBox = TextAsset('Bulls = '+str(bulls)+' , Cows = '+str(cows))
         
-        Sprite(scoreBox,(RADIUS*8 + 25, data['guesses']/4))
+        Sprite(scoreBox,(RADIUS*8 + 25, (data['guesses']/4-1)*(RADIUS*2+5)))
     data['guess'] = ''
 
 def checkBulls(answer):
@@ -152,6 +152,7 @@ if __name__ == '__main__':
     emptyCircle = CircleAsset(RADIUS,outline,grey)
     key = TextAsset('Colors = r, o, y, g, c, b, p, v, w, d')
     scoreBox = TextAsset('0 Bulls, 0 Cows')
+    winBox = TextAsset
     
     #guessing grid
     circlex = 0
