@@ -131,7 +131,7 @@ def checkAnswer(answer):
     
     data['guess'] = '' #reset guess and try again
 
-#checks how many guessed colors are in right spot
+#checks how many guessed colors are right color in right spot
 #for each digit in the guess, checks against corresponding digit in code
 def checkBulls(answer):
     bulls = 0
