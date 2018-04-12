@@ -20,7 +20,7 @@ violet = Color(0x800080,1)
 pink = Color(0xFF00FF,1)
 white = Color(0xFFFFFF,1)
 black = Color(0x000000,1)
-grey = Color(0xF2F2F2,1)
+grey = Color(0xF4F4F4,1)
 outline = LineStyle(2,black)
 
 #returns the code to be guessed
@@ -61,64 +61,64 @@ def turnRed(event):
         enterColor(red)
         data['guess'] += '0'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnOrange(event):
     if '1' not in data['guess']:
         enterColor(orange)
         data['guess'] += '1'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnYellow(event):
     if '2' not in data['guess']:
         enterColor(yellow)
         data['guess'] += '2'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnGreen(event):    
     if '3' not in data['guess']:
         enterColor(green)
         data['guess'] += '3'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnCyan(event):    
     if '4' not in data['guess']:
         enterColor(cyan)
         data['guess'] += '4'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnBlue(event):    
     if '5' not in data['guess']:
         enterColor(blue)
         data['guess'] += '5'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnPink(event):
     if '6' not in data['guess']:
         enterColor(pink)
         data['guess'] += '6'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnViolet(event):    
     if '7' not in data['guess']:
         enterColor(violet)
         data['guess'] += '7'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnWhite(event):    
     if '8' not in data['guess']:
         enterColor(white)
         data['guess'] += '8'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 def turnDark(event):    
     if '9' not in data['guess']:
         enterColor(black)
         data['guess'] += '9'
         if data['guesses']%4 == 0:
-                checkAnswer(data['guess'])
+                checkCode(data['guess'])
 
 #checks 4-digit guess against answer code, displays bulls and cows
-def checkAnswer(answer):
+def checkCode(answer):
     if checkBulls(data['guess']) == 4: #if you got it right, displays win message in correct spot
         Sprite(winBox,(RADIUS*8 + 25, (data['guesses']/4-1)*(RADIUS*2+5)))
     elif data['guesses'] == ATTEMPTS * 4: #if you're out of guesses, displays lose message in correct spot
