@@ -48,7 +48,7 @@ def pickCode():
     return data['code1'] + data['code2'] + data['code3'] + data['code4']
 
 #sprites a circle of the guessed color in the correct spot
-def turnColor(color):
+def enterColor(color):
     Circle = CircleAsset(20,outline,color)
     if data['guesses'] < 4 * ATTEMPTS: #only goes for number of attempts possible
         Sprite(Circle,((data['guesses'] - data['guesses']//4 * 4)*45, data['guesses']//4 * 45))
@@ -58,61 +58,61 @@ def turnColor(color):
 #sets the color for turnColor() and checks answer if 4 have been guessed
 def turnRed(event):
     if '0' not in data['guess']: #can't guess same color twice
-        turnColor(red)
+        enterColor(red)
         data['guess'] += '0'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnOrange(event):
     if '1' not in data['guess']:
-        turnColor(orange)
+        enterColor(orange)
         data['guess'] += '1'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnYellow(event):
     if '2' not in data['guess']:
-        turnColor(yellow)
+        enterColor(yellow)
         data['guess'] += '2'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnGreen(event):    
     if '3' not in data['guess']:
-        turnColor(green)
+        enterColor(green)
         data['guess'] += '3'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnCyan(event):    
     if '4' not in data['guess']:
-        turnColor(cyan)
+        enterColor(cyan)
         data['guess'] += '4'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnBlue(event):    
     if '5' not in data['guess']:
-        turnColor(blue)
+        enterColor(blue)
         data['guess'] += '5'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnPink(event):
     if '6' not in data['guess']:
-        turnColor(pink)
+        enterColor(pink)
         data['guess'] += '6'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnViolet(event):    
     if '7' not in data['guess']:
-        turnColor(violet)
+        enterColor(violet)
         data['guess'] += '7'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnWhite(event):    
     if '8' not in data['guess']:
-        turnColor(white)
+        enterColor(white)
         data['guess'] += '8'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
 def turnDark(event):    
     if '9' not in data['guess']:
-        turnColor(black)
+        enterColor(black)
         data['guess'] += '9'
         if data['guesses']%4 == 0:
                 checkAnswer(data['guess'])
