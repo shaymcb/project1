@@ -26,15 +26,34 @@ def buildBoard():
     pieceList[3][3] = 'w'
     
 def mouseClick(event):
-    clickCol = event.x//BOX_SIZE
-    clickRow = event.y//BOX_SIZE
+    clickCol = int(event.x//BOX_SIZE)
+    clickRow = int(event.y//BOX_SIZE)
     color = 'b'
     
     sameRow = False
     sameCol = False
-    sameDiag = False
-    if 
+    sameDiag1 = False
+    sameDiag2 = False
+    
+    if color in pieceList[clickRow]:
+        sameRow = True
+    
+    for row in pieceList:
+        if row[clickCol] == color:
+            sameCol = True
+            break
 
+    for i in range(-1*(min(clickCol,clickRow)),min(8-clickCol,8-clickRow)):
+        if pieceList[clickRow+i][clickCol+i] == color:
+            sameDiag1 = True
+            break
+    
+    for i in range(-1*(min(clickCol,7-clickRow)),min(8-clickCol,clickRow)):
+        if pieceList[clickRow-i][clickCol+i] == color:
+            sameDiag2 = True
+            break
+        
+    print(sameRow,sameCol,sameDiag1,sameDiag2)
 
 if __name__ == '__main__':
     pieceList = []
