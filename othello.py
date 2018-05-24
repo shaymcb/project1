@@ -32,7 +32,7 @@ def mouseClick(event):
     othercolor = 'w'
     
     for i in range(-1*min(1,clickRow),min(1,7-clickRow):
-        for j in range(-1,1):
+        for j in range(-1*min(1,clickCol),min(1,7-clickCol):
             if pieceList[clickRow+i][clickCol+j] == 'w':
                 
     
