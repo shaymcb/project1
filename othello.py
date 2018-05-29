@@ -8,23 +8,21 @@ BOX_SIZE = 70
 
 #set board and starting position
 def buildBoard():
-    for rows in range(8):
+    for row in range(8):
         L = []
-        for cols in range(8):
-            Sprite(box,(cols*BOX_SIZE,rows*BOX_SIZE))
-            L.append('')
-        pieceList.append(L)
-     
+        for col in range(8):
+            Sprite(box,(col*BOX_SIZE,row*BOX_SIZE))
+            if pieceList[row][col] == 1:
+                spriteList.append(Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE)))
+            elif pieceList[row][col] == 2:  
+                spriteList.append(Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE)))
+    """
     spriteList.append(Sprite(blackCircle,(3*BOX_SIZE,4*BOX_SIZE)))
     spriteList.append(Sprite(blackCircle,(4*BOX_SIZE,3*BOX_SIZE)))    
     spriteList.append(Sprite(whiteCircle,(4*BOX_SIZE,4*BOX_SIZE)))
     spriteList.append(Sprite(whiteCircle,(3*BOX_SIZE,3*BOX_SIZE)))
-    
-    pieceList[4][3] = 1
-    pieceList[3][4] = 1
-    pieceList[4][4] = 2
-    pieceList[3][3] = 2
-    print(pieceList)
+    """
+  
     
 def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
@@ -91,15 +89,12 @@ def flipNorthEast(row,col):
 def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
-        """
-    for row in range(8):
-        for col in range(8):
-            if pieceList[row][col] == 1:
-                """
+    
+    buildBoard()
 
 
 if __name__ == '__main__':
-    pieceList = [[['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]]
+    pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
     spriteList = []
     data = {}
     data['player'] = 1
