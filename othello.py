@@ -20,32 +20,49 @@ def buildBoard():
     spriteList.append(Sprite(whiteCircle,(4*BOX_SIZE,4*BOX_SIZE)))
     spriteList.append(Sprite(whiteCircle,(3*BOX_SIZE,3*BOX_SIZE)))
     
-    pieceList[4][3] = 'b'
-    pieceList[3][4] = 'b'
-    pieceList[4][4] = 'w'
-    pieceList[3][3] = 'w'
+    pieceList[4][3] = 1
+    pieceList[3][4] = 1
+    pieceList[4][4] = 2
+    pieceList[3][3] = 2
     
 def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
-    color = 'b'
-    otherColor = 'w'
-
     
-    for i in range(-1*min(1,clickRow),min(1,7-clickRow)):
-        for j in range(-1*min(1,clickCol),min(1,7-clickCol)):
-            if pieceList[clickRow+i][clickCol+j] == otherColor:
-                if color == 'b':
+    for i in range(-1*min(1,clickRow),min(2,8-clickRow)):
+        for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
+            if pieceList[clickRow+i][clickCol+j] == data['otherPlayer'] and pieceList[clickRow][clickCol] == '':
+                placed = True
+                if data['player'] == 1:
                     spriteList.append(Sprite(blackCircle,(clickCol*BOX_SIZE,clickRow*BOX_SIZE)))
                 else:
-                    spriteList.append(Sprite(whiteCircle,(clickCol*BOX_SIZE,ClickRow*BOX_SIZE)))
+                    spriteList.append(Sprite(whiteCircle,(clickCol*BOX_SIZE,clickRow*BOX_SIZE)))
     
-    flipWest(clickRow,clickCol)
-    
+    if placed == True:
+        flipWest(clickRow,clickCol)
+        flipEast(clickRow,clickCol)
+        
+        data['player'] = 3 - data['player']
+        data['otherPlayer'] = 3 - data['otherPlayer']
+  
 def flipWest(row,col):
-    if color in pieceList[clickRow]:
-        sameRow = True
+    if data['player'] in pieceList[row][:col]:
+        pos = pieceList[row][:col].index(data['player'])
+        for i in range(pos,col):
+            if pieceList[row][i] == data['otherPlayer']:
+                pieceList[row][i] = data['player']
+                print(True)
 
+def flipEast(row,col):
+    if data['player'] in pieceList[row][col:]:
+        pos = pieceList[row][col:].index(data['player'])
+        for i in range(col,pos):
+            if pieceList[row][i] == data['otherPlayer']:
+                pieceList[row][i] = data['player']
+                print(True)
+    
+    
+"""
 def flipNorth(row,col):
     for row in pieceList:
         if row[clickCol] == color:
@@ -69,6 +86,10 @@ def flipNorthEast(row,col):
 if __name__ == '__main__':
     pieceList = []
     spriteList = []
+    data = {}
+    data['player'] = 1
+    data['otherPlayer'] = 2
+    
     green = Color(0x00FF00, 1)
     white = Color(0xFFFFFF, 1)
     black = Color(0x000000, 1)
