@@ -33,10 +33,6 @@ def mouseClick(event):
         for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
             if pieceList[clickRow+i][clickCol+j] == data['otherPlayer'] and pieceList[clickRow][clickCol] == '':
                 placed = True
-                if data['player'] == 1:
-                    spriteList.append(Sprite(blackCircle,(clickCol*BOX_SIZE,clickRow*BOX_SIZE)))
-                else:
-                    spriteList.append(Sprite(whiteCircle,(clickCol*BOX_SIZE,clickRow*BOX_SIZE)))
     
     if placed == True:
         flipWest(clickRow,clickCol)
