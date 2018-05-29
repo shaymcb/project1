@@ -24,13 +24,14 @@ def buildBoard():
     pieceList[3][4] = 1
     pieceList[4][4] = 2
     pieceList[3][3] = 2
+    print(pieceList)
     
 def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
     placed = False
     
-    for i in range(-1*min(1,clickRow),min(2,8-clickRow)):
+    for i in range(-1*min(1,clickRow),min(2,7-clickRow)):
         for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
             if pieceList[clickRow+i][clickCol+j] == data['otherPlayer'] and pieceList[clickRow][clickCol] == '':
                 placed = True
@@ -43,8 +44,11 @@ def mouseClick(event):
         flipWest(clickRow,clickCol)
         flipEast(clickRow,clickCol)
         
+        
+        pieceList[clickRow][clickCol] = data['player']
         data['player'] = 3 - data['player']
         data['otherPlayer'] = 3 - data['otherPlayer']
+        redrawAll()
   
 #works
 def flipWest(row,col):
@@ -57,8 +61,8 @@ def flipWest(row,col):
 
 def flipEast(row,col):
     if data['player'] in pieceList[row][col:]:
-        pos = pieceList[row][col:].index(data['player'])
-        print(pos) #this is wrong idk why
+        pos = pieceList[row][col:].index(data['player']) + col
+        print(pos)
         for i in range(col,pos):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
@@ -84,10 +88,18 @@ def flipNorthEast(row,col):
             sameDiag2 = True
             break
 """        
+def redrawAll():
+    for item in App().spritelist[:]:
+        item.destroy()
+        """
+    for row in range(8):
+        for col in range(8):
+            if pieceList[row][col] == 1:
+                """
 
 
 if __name__ == '__main__':
-    pieceList = []
+    pieceList = [[['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]]
     spriteList = []
     data = {}
     data['player'] = 1
