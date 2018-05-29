@@ -51,16 +51,15 @@ def flipWest(row,col):
         for i in range(pos,col):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
-                print(True)
+
 
 def flipEast(row,col):
     if data['player'] in pieceList[row][col:]:
         pos = pieceList[row][col:].index(data['player']) + col
-        print(pos)
         for i in range(col,pos):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
-                print(True)
+
     
     
 """
