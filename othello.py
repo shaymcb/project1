@@ -28,6 +28,7 @@ def buildBoard():
 def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
+    placed = False
     
     for i in range(-1*min(1,clickRow),min(2,8-clickRow)):
         for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
@@ -45,6 +46,7 @@ def mouseClick(event):
         data['player'] = 3 - data['player']
         data['otherPlayer'] = 3 - data['otherPlayer']
   
+#works
 def flipWest(row,col):
     if data['player'] in pieceList[row][:col]:
         pos = pieceList[row][:col].index(data['player'])
@@ -56,6 +58,7 @@ def flipWest(row,col):
 def flipEast(row,col):
     if data['player'] in pieceList[row][col:]:
         pos = pieceList[row][col:].index(data['player'])
+        print(pos) #this is wrong idk why
         for i in range(col,pos):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
