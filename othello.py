@@ -37,6 +37,8 @@ def mouseClick(event):
     if placed == True:
         flipWest(clickRow,clickCol)
         flipEast(clickRow,clickCol)
+        flipNorth(clickRow,clickCol)
+        flipSouth(clickRow,clickCol)
         
         
         pieceList[clickRow][clickCol] = data['player']
@@ -46,35 +48,48 @@ def mouseClick(event):
   
 #works
 def flipWest(row,col):
-    if data['player'] in pieceList[row][:col]:
-        pos = pieceList[row][:col].index(data['player'])
-        for i in range(pos,col):
+    if data['player'] in pieceList[row][:col]: #if in the same row there is matching piece to the west
+        pos = pieceList[row][:col].index(data['player']) #record its position
+        for i in range(pos,col):        #and check between for other color
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
 
 
 def flipEast(row,col):
-    if data['player'] in pieceList[row][col:]:
+    if data['player'] in pieceList[row][col:]: #same as above but for east
         pos = pieceList[row][col:].index(data['player']) + col
         for i in range(col,pos):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
 
-    
-    
-"""
+
 def flipNorth(row,col):
-    for row in pieceList:
-        if row[clickCol] == color:
-            sameCol = True
+    for i in range(0,row):
+        if pieceList[i][col] == data['player']:  #if this row has a matching piece above in same column
+            for j in range(i, row): #check between them for other color
+                if pieceList[j][col] == data['otherPlayer']:
+                    pieceList[j][col] = data['player']
             break
 
-def flipNorthWest(row,col):
-    for i in range(-1*(min(clickCol,clickRow)),min(8-clickCol,8-clickRow)):
-        if pieceList[clickRow+i][clickCol+i] == color:
-            sameDiag1 = True
+def flipSouth(row,col):
+    for i in range(row,8):
+        if pieceList[i][col] == data['player']:  #if this row has a matching piece below in same column
+            for j in range(row,i): #check between them for other color
+                if pieceList[j][col] == data['otherPlayer']:
+                    pieceList[j][col] = data['player']
             break
-    
+
+
+def flipNorthWest(row,col):
+    for i in range(-1*(min(col,row)),0):
+        if pieceList[row+i][col+i] == data['player']:
+            print(i)
+            for j in range(i,0):
+                if pieceList[row+j][col+j] == data['otherPlayer']:
+                    pieceList[row+j][col+j] == data['player']
+            break
+
+"""
 def flipNorthEast(row,col):
     for i in range(-1*(min(clickCol,7-clickRow)),min(8-clickCol,clickRow)):
         if pieceList[clickRow-i][clickCol+i] == color:
