@@ -29,36 +29,42 @@ def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
     color = 'b'
-    othercolor = 'w'
-    sameRow = False
-    sameCol = False
-    sameDiag1 = False
-    sameDiag2 = False
+    otherColor = 'w'
+
     
     for i in range(-1*min(1,clickRow),min(1,7-clickRow)):
         for j in range(-1*min(1,clickCol),min(1,7-clickCol)):
-            if pieceList[clickRow+i][clickCol+j] == 'w':
-
+            if pieceList[clickRow+i][clickCol+j] == otherColor:
+                if color == 'b':
+                    spriteList.append(Sprite(blackCircle,(clickCol*BOX_SIZE,clickRow*BOX_SIZE)))
+                else:
+                    spriteList.append(Sprite(whiteCircle,(clickCol*BOX_SIZE,ClickRow*BOX_SIZE)))
     
+    flipWest(clickRow,clickCol)
+    
+def flipWest(row,col):
     if color in pieceList[clickRow]:
         sameRow = True
-    
+
+def flipNorth(row,col):
     for row in pieceList:
         if row[clickCol] == color:
             sameCol = True
             break
 
+def flipNorthWest(row,col):
     for i in range(-1*(min(clickCol,clickRow)),min(8-clickCol,8-clickRow)):
         if pieceList[clickRow+i][clickCol+i] == color:
             sameDiag1 = True
             break
     
+def flipNorthEast(row,col):
     for i in range(-1*(min(clickCol,7-clickRow)),min(8-clickCol,clickRow)):
         if pieceList[clickRow-i][clickCol+i] == color:
             sameDiag2 = True
             break
-        
-    print(sameRow,sameCol,sameDiag1,sameDiag2)
+"""        
+
 
 if __name__ == '__main__':
     pieceList = []
