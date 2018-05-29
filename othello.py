@@ -16,12 +16,6 @@ def buildBoard():
                 spriteList.append(Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE)))
             elif pieceList[row][col] == 2:  
                 spriteList.append(Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE)))
-    """
-    spriteList.append(Sprite(blackCircle,(3*BOX_SIZE,4*BOX_SIZE)))
-    spriteList.append(Sprite(blackCircle,(4*BOX_SIZE,3*BOX_SIZE)))    
-    spriteList.append(Sprite(whiteCircle,(4*BOX_SIZE,4*BOX_SIZE)))
-    spriteList.append(Sprite(whiteCircle,(3*BOX_SIZE,3*BOX_SIZE)))
-    """
   
     
 def mouseClick(event):
@@ -39,7 +33,8 @@ def mouseClick(event):
         flipEast(clickRow,clickCol)
         flipNorth(clickRow,clickCol)
         flipSouth(clickRow,clickCol)
-        
+        flipNorthWest(clickRow,clickCol)
+        flipSouthEast(clickRow,clickCol)
         
         pieceList[clickRow][clickCol] = data['player']
         data['player'] = 3 - data['player']
@@ -81,12 +76,19 @@ def flipSouth(row,col):
 
 
 def flipNorthWest(row,col):
-    for i in range(-1*(min(col,row)),0):
+    for i in range(1,min(col,row)+1):
+        if pieceList[row-i][col-i] == data['player']:
+            for j in range(0,i):
+                if pieceList[row-j][col-j] == data['otherPlayer']:
+                    pieceList[row-j][col-j] = data['player']
+            break
+
+def flipSouthEast(row,col):
+    for i in range(1,min(8-col,8-row)):
         if pieceList[row+i][col+i] == data['player']:
-            print(i)
-            for j in range(i,0):
+            for j in range(0,i):
                 if pieceList[row+j][col+j] == data['otherPlayer']:
-                    pieceList[row+j][col+j] == data['player']
+                    pieceList[row+j][col+j] = data['player']
             break
 
 """
