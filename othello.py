@@ -30,16 +30,15 @@ def mouseClick(event):
     clickRow = int(event.y//BOX_SIZE)
     color = 'b'
     othercolor = 'w'
-    
-    for i in range(-1*min(1,clickRow),min(1,7-clickRow):
-        for j in range(-1*min(1,clickCol),min(1,7-clickCol):
-            if pieceList[clickRow+i][clickCol+j] == 'w':
-                
-    
     sameRow = False
     sameCol = False
     sameDiag1 = False
     sameDiag2 = False
+    
+    for i in range(-1*min(1,clickRow),min(1,7-clickRow)):
+        for j in range(-1*min(1,clickCol),min(1,7-clickCol)):
+            if pieceList[clickRow+i][clickCol+j] == 'w':
+
     
     if color in pieceList[clickRow]:
         sameRow = True
