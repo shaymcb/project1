@@ -47,13 +47,15 @@ def mouseClick(event):
 #works
 def flipWest(row,col):
     status = False
-    if data['player'] in pieceList[row][:col]: #if in the same row there is matching piece to the west
-        pos = pieceList[row][:col].index(data['player']) #record its position
-        for i in range(pos,col):        #and check between for other color
-            if pieceList[row][i] == data['otherPlayer']:
-                pieceList[row][i] = data['player']
-                status = True
-        return status
+    for i in range(0,col):
+        if pieceList[row][i] == '':
+            break
+        elif pieceList[row][i] == data['player']:
+            for j in range(i,col):
+                if pieceList[row][j] == data['otherPlayer']:
+                    pieceList[row][j] = data['player']
+                    status = True
+    return status
 
 def flipEast(row,col):
     status = False
@@ -67,69 +69,81 @@ def flipEast(row,col):
 
 def flipNorth(row,col):
     status = False
-    for i in range(0,row):
+    for i in range(0,row+1):
+        if pieceList[i][col] == '':
+            break
         if pieceList[i][col] == data['player']:  #if this row has a matching piece above in same column
             for j in range(i, row): #check between them for other color
                 if pieceList[j][col] == data['otherPlayer']:
                     pieceList[j][col] = data['player']
                     status = True
-            return status
+    return status
 
 
 def flipSouth(row,col):
     status = False
-    for i in range(row,8):
-        if pieceList[i][col] == data['player']:  #if this row has a matching piece below in same column
+    for i in range(row+1,8):
+        if pieceList[i][col] == '':
+            break
+        elif pieceList[i][col] == data['player']:  #if this row has a matching piece below in same column
             for j in range(row,i): #check between them for other color
                 if pieceList[j][col] == data['otherPlayer']:
                     pieceList[j][col] = data['player']
                     status = True
-            return status
+    return status
             
 
 
 def flipNorthWest(row,col):
     status = False
     for i in range(1,min(col,row)+1):
-        if pieceList[row-i][col-i] == data['player']:
+        if pieceList[row-i][col-i] == '':
+            break
+        elif pieceList[row-i][col-i] == data['player']:
             for j in range(0,i):
                 if pieceList[row-j][col-j] == data['otherPlayer']:
                     pieceList[row-j][col-j] = data['player']
                     status = True
-            return status
+    return status
 
 def flipSouthEast(row,col):
     status = False
     for i in range(1,min(8-col,8-row)):
-        if pieceList[row+i][col+i] == data['player']:
+        if pieceList[row+i][col+i] == '':
+            break
+        elif pieceList[row+i][col+i] == data['player']:
             for j in range(0,i):
                 if pieceList[row+j][col+j] == data['otherPlayer']:
                     pieceList[row+j][col+j] = data['player']
                     status = True
-            return status
+    return status
             
 
 
 def flipSouthWest(row,col):
     status = False
     for i in range(1,min(col,7-row)):
-        if pieceList[row+i][col-i] == data['player']:
+        if pieceList[row+i][col-i] == '':
+            break
+        elif pieceList[row+i][col-i] == data['player']:
             for j in range(0,i):
                 if pieceList[row+j][col-j] == data['otherPlayer']:
                     pieceList[row+j][col-j] = data['player']
                     status = True
-            return status
+    return status
        
        
 def flipNorthEast(row,col):
     status = False
     for i in range(1,min(8-col,row)):
-        if pieceList[row-i][col+i] == data['player']:
+        if pieceList[row-i][col+i] == '':
+            break
+        elif pieceList[row-i][col+i] == data['player']:
             for j in range(0,i):
                 if pieceList[row-j][col+j] == data['otherPlayer']:
                     pieceList[row-j][col+j] = data['player']
                     status = True
-            return status
+    return status
 
 
 def redrawAll():
