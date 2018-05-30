@@ -29,19 +29,20 @@ def mouseClick(event):
                 placed = True
     
     if placed == True:
-        flipWest(clickRow,clickCol)
-        flipEast(clickRow,clickCol)
-        flipNorth(clickRow,clickCol)
-        flipSouth(clickRow,clickCol)
-        flipNorthWest(clickRow,clickCol)
-        flipSouthEast(clickRow,clickCol)
-        flipNorthEast(clickRow,clickCol)
-        flipSouthWest(clickRow,clickCol)
+        w = flipWest(clickRow,clickCol)
+        e = flipEast(clickRow,clickCol)
+        n = flipNorth(clickRow,clickCol)
+        s = flipSouth(clickRow,clickCol)
+        nw = flipNorthWest(clickRow,clickCol)
+        se = flipSouthEast(clickRow,clickCol)
+        ne = flipNorthEast(clickRow,clickCol)
+        sw = flipSouthWest(clickRow,clickCol)
         
-        pieceList[clickRow][clickCol] = data['player']
-        data['player'] = 3 - data['player']
-        data['otherPlayer'] = 3 - data['otherPlayer']
-        redrawAll()
+        if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
+            pieceList[clickRow][clickCol] = data['player']
+            data['player'] = 3 - data['player']
+            data['otherPlayer'] = 3 - data['otherPlayer']
+            redrawAll()
   
 #works
 def flipWest(row,col):
