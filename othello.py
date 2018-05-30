@@ -54,7 +54,6 @@ def flipWest(row,col):
                 status = True
         return status
 
-
 def flipEast(row,col):
     status = False
     if data['player'] in pieceList[row][col:]: #same as above but for east
@@ -63,8 +62,7 @@ def flipEast(row,col):
             if pieceList[row][i] == data['otherPlayer']:
                 pieceList[row][i] = data['player']
                 status = True
-            return status
-
+        return status
 
 def flipNorth(row,col):
     status = False
