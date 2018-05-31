@@ -2,6 +2,10 @@
 #23May2018
 #othello.py
 
+#add a sign for whose turn it is
+#add an endgame
+#add comments
+
 from ggame import *
 
 BOX_SIZE = 70
@@ -13,9 +17,14 @@ def buildBoard():
         for col in range(8):
             Sprite(box,(col*BOX_SIZE,row*BOX_SIZE))
             if pieceList[row][col] == 1:
-                spriteList.append(Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE)))
+                Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE))
             elif pieceList[row][col] == 2:  
-                spriteList.append(Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE)))
+                Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
+        
+    if data['player'] == 1:
+        Sprite(blackCircle,(BOX_SIZE * 9,0))
+    else:
+        Sprite(whiteCircle,(BOX_SIZE * 9,0))
   
     
 def mouseClick(event):
