@@ -64,7 +64,7 @@ def flipEast(row,col):
             break
         elif pieceList[row][i] == data['player']:  #if find another of same color
             for j in range(col+1,i):  #check between them
-                pieceList[row][j] == data['player']  #flip
+                pieceList[row][j] = data['player']  #flip
                 status = True
             break
         """
