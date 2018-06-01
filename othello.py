@@ -34,22 +34,30 @@ def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
     placed = False
-
-    w = flipWest(clickRow,clickCol)
-    e = flipEast(clickRow,clickCol)
-    n = flipNorth(clickRow,clickCol)
-    s = flipSouth(clickRow,clickCol)
-    nw = flipNorthWest(clickRow,clickCol)
-    se = flipSouthEast(clickRow,clickCol)
-    ne = flipNorthEast(clickRow,clickCol)
-    sw = flipSouthWest(clickRow,clickCol)
     
-    if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
-        pieceList[clickRow][clickCol] = data['player']
-        data['player'] = 3 - data['player']
-        data['otherPlayer'] = 3 - data['otherPlayer']
-        updateScore()
-        redrawAll()
+    for i in range(-1*min(1,clickRow),min(2,8-clickRow)):
+        for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
+            if pieceList[clickRow+i][clickCol+j] == data['otherPlayer'] and pieceList[clickRow][clickCol] == '':
+                placed = True
+    
+    if placed == True:
+        w = flipWest(clickRow,clickCol)
+        e = flipEast(clickRow,clickCol)
+        n = flipNorth(clickRow,clickCol)
+        s = flipSouth(clickRow,clickCol)
+        nw = flipNorthWest(clickRow,clickCol)
+        se = flipSouthEast(clickRow,clickCol)
+        ne = flipNorthEast(clickRow,clickCol)
+        sw = flipSouthWest(clickRow,clickCol)
+        
+        if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
+            pieceList[clickRow][clickCol] = data['player']
+            data['player'] = 3 - data['player']
+            data['otherPlayer'] = 3 - data['otherPlayer']
+            updateScore()
+            redrawAll()
+
+
   
 #works
 def flipWest(row,col):
