@@ -23,12 +23,13 @@ def buildBoard():
             elif pieceList[row][col] == 2:  
                 Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
                 
-    Sprite(TextAsset('Turn:'),(BOX_SIZE*8.2,BOX_SIZE*.3))
+    Sprite(TextAsset('Turn:'),(BOX_SIZE*8.2,BOX_SIZE*.4))
     if data['player'] == 1:
-        Sprite(blackCircle,(BOX_SIZE * 9,0))
+        Sprite(blackCircle,(BOX_SIZE*9,BOX_SIZE*.1))
     else:
-        Sprite(whiteCircle,(BOX_SIZE * 9,0))
+        Sprite(whiteCircle,(BOX_SIZE*9,BOX_SIZE*.1))
   
+    Sprite(TextAsset('Black: '+str(scoreList[0])+' White: '+str(scoreList[1])),(BOX_SIZE*8.2,BOX_SIZE*1.5))  
     
 def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
@@ -84,15 +85,6 @@ def flipEast(row,col):
                     pieceList[row][j] = data['player']  #flip
                     status = True
             break
-        """
-    if data['player'] in pieceList[row][col:]: #same as above but for east
-        pos = pieceList[row][col:].index(data['player']) + col
-        for i in range(col,pos):
-            if pieceList[row][i] == data['otherPlayer']:
-                pieceList[row][i] = data['player']
-                status = True
-                """
-    
     return status
 
 def flipNorth(row,col):
@@ -179,9 +171,13 @@ def flipNorthEast(row,col):
     return status
     
 def updateScore():
-    scoreList[0] = pieceList.count(1)
-    scoreList[1] = pieceList.count(2)
-    print(scoreList)
+    black = 0
+    white = 0
+    for row in pieceList:
+        black += row.count(1)
+        white += row.count(2)
+    scoreList[0] = black
+    scoreList[1] = white
 
 def redrawAll():
     for item in App().spritelist[:]:
