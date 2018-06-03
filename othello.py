@@ -12,8 +12,9 @@ from ggame import *
 
 BOX_SIZE = 70
 
-#set board and starting position
+#displays board, score, and current pieces in list
 def buildBoard():
+    #board
     for row in range(8):
         L = []
         for col in range(8):
@@ -22,45 +23,42 @@ def buildBoard():
                 Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE))
             elif pieceList[row][col] == 2:  
                 Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
-                
+    
+    #pieces            
     Sprite(TextAsset('Turn:'),(BOX_SIZE*8.2,BOX_SIZE*.4))
     if data['player'] == 1:
         Sprite(blackCircle,(BOX_SIZE*9,BOX_SIZE*.1))
     else:
         Sprite(whiteCircle,(BOX_SIZE*9,BOX_SIZE*.1))
-  
+    
+    #score
     Sprite(TextAsset('Black: '+str(scoreList[0])+' White: '+str(scoreList[1])),(BOX_SIZE*8.2,BOX_SIZE*1.5))  
     
+    #detects where mouse clicks, decides if it's legal, and calls flips
 def mouseClick(event):
+    #converts mouse x and y into columns and rows
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
-    placed = False
     
-    for i in range(-1*min(1,clickRow),min(2,8-clickRow)):
-        for j in range(-1*min(1,clickCol),min(2,8-clickCol)):
-            if pieceList[clickRow+i][clickCol+j] == data['otherPlayer'] and pieceList[clickRow][clickCol] == '':
-                placed = True
+    #calls functions to flip pieces
+    w = flipWest(clickRow,clickCol)
+    e = flipEast(clickRow,clickCol)
+    n = flipNorth(clickRow,clickCol)
+    s = flipSouth(clickRow,clickCol)
+    nw = flipNorthWest(clickRow,clickCol)
+    se = flipSouthEast(clickRow,clickCol)
+    ne = flipNorthEast(clickRow,clickCol)
+    sw = flipSouthWest(clickRow,clickCol)
     
-    if placed == True:
-        w = flipWest(clickRow,clickCol)
-        e = flipEast(clickRow,clickCol)
-        n = flipNorth(clickRow,clickCol)
-        s = flipSouth(clickRow,clickCol)
-        nw = flipNorthWest(clickRow,clickCol)
-        se = flipSouthEast(clickRow,clickCol)
-        ne = flipNorthEast(clickRow,clickCol)
-        sw = flipSouthWest(clickRow,clickCol)
-        
-        if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
-            pieceList[clickRow][clickCol] = data['player']
-            data['player'] = 3 - data['player']
-            data['otherPlayer'] = 3 - data['otherPlayer']
-            updateScore()
-            redrawAll()
-
+    #if any of the pieces flipped, it's a legal move so update board and switch players
+    if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
+        pieceList[clickRow][clickCol] = data['player']
+        data['player'] = 3 - data['player']
+        data['otherPlayer'] = 3 - data['otherPlayer']
+        updateScore()
+        redrawAll()
 
   
-#works
 def flipWest(row,col):
     status = False
     for i in range(col-1,0,-1):
@@ -69,7 +67,7 @@ def flipWest(row,col):
         elif pieceList[row][i] == data['player']:
             for j in range(i,col):
                 if pieceList[row][j] == data['otherPlayer']: #if other color
-                    pieceList[row][j] = data['player'] #technically this doesn't need to be in here bc it's already determined that only the other color lies in this range
+                    pieceList[row][j] = data['player'] #technically this doesn't need to be in this 'if' bc it's already determined that only the other color lies in this range
                     status = True #but I needed the status part to get rid of some illegal moves
             break
     return status
