@@ -57,6 +57,7 @@ def mouseClick(event):
         data['otherPlayer'] = 3 - data['otherPlayer']
         updateScore()
         redrawAll()
+        winner()
 
   
 def flipWest(row,col):
@@ -183,6 +184,18 @@ def redrawAll():
     
     buildBoard()
 
+def winner():
+    for row in pieceList:
+        for col in row:
+            if col == '':
+                break
+            elif row == 7:
+                if scoreList[0] > scoreList[1]:
+                    print('Black Wins!')
+                elif scoreList[0] < scoreList[1]:
+                    print('White Wins!')
+                else:
+                    print('Tie Game!')
 
 if __name__ == '__main__':
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
