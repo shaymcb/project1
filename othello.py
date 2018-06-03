@@ -40,6 +40,9 @@ def mouseClick(event):
     clickCol = int(event.x//BOX_SIZE)
     clickRow = int(event.y//BOX_SIZE)
     
+    if clickRow > 7 or clickCol > 7 or pieceList[clickRow][clickCol] != '': #breaks if illegal move
+        return False
+    
     #calls functions to flip pieces
     w = flipWest(clickRow,clickCol)
     e = flipEast(clickRow,clickCol)
@@ -62,7 +65,7 @@ def mouseClick(event):
   
 def flipWest(row,col):
     status = False
-    for i in range(col-1,0,-1):
+    for i in range(col-1,-1,-1):
         if pieceList[row][i] == '':
             break
         elif pieceList[row][i] == data['player']:
@@ -88,7 +91,7 @@ def flipEast(row,col):
 
 def flipNorth(row,col):
     status = False
-    for i in range(row-1,0,-1):
+    for i in range(row-1,-1,-1):
         if pieceList[i][col] == '':
             break
         elif pieceList[i][col] == data['player']:  #if this row has a matching piece above in same column
