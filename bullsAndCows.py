@@ -200,16 +200,16 @@ def redrawAll():
 
 #checks for empty spaces, if finds none, game is over so returns winner
 def winner():
-    for row in pieceList: #it's a matrix so have to look at individual lists within the big list
-        if row.count('') > 0:
-                break
-        elif row == 7:
+    for i in range(8): #it's a matrix so have to look at individual lists within the big list
+        if pieceList[i].count('') > 0:
+            break
+        elif i == 7:
             if scoreList[0] > scoreList[1]:
-                Sprite(TextAsset("Black Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+                Sprite(TextAsset("Black Wins!",style='bold 40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*5))
             elif scoreList[0] < scoreList[1]:
-                Sprite(TextAsset("White Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+                Sprite(TextAsset("White Wins!",style='bold 40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*5))
             else:
-                Sprite(TextAsset("Tie Game",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+                Sprite(TextAsset("Tie Game",style='bold 40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*5))
 
 if __name__ == '__main__':
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
