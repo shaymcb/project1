@@ -14,17 +14,17 @@ BOX_SIZE = 70
 
 #displays board, score, and current pieces in list
 def buildBoard():
-    #board
-    for row in range(8):
-        L = []
+    #board and pieces
+    for row in range(8): 
         for col in range(8):
-            Sprite(box,(col*BOX_SIZE,row*BOX_SIZE))
-            if pieceList[row][col] == 1:
+            Sprite(box,(col*BOX_SIZE,row*BOX_SIZE)) #sprites 8 rows of 8 columns of boxes
+            #pieces: checks each place in list of pieces and sprites black or white circles accordingly
+            if pieceList[row][col] == 1: 
                 Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE))
             elif pieceList[row][col] == 2:  
                 Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
     
-    #pieces            
+    #displays whose turn it is            
     Sprite(TextAsset('Turn:'),(BOX_SIZE*8.2,BOX_SIZE*.4))
     if data['player'] == 1:
         Sprite(blackCircle,(BOX_SIZE*9,BOX_SIZE*.1))
