@@ -201,9 +201,9 @@ def redrawAll():
 #checks for empty spaces, if finds none, game is over so returns winner
 def winner():
     for i in range(8): #it's a matrix so have to look at individual lists within the big list
-        if pieceList[i].count('') > 0:
+        if pieceList[i].count('') > 0: #break if there's an empty space
             break
-        elif i == 7:
+        elif i == 7: #if made it to the last row and there's no empty, end the game
             if scoreList[0] > scoreList[1]:
                 Sprite(TextAsset("Black Wins!",style='bold 40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*5))
             elif scoreList[0] < scoreList[1]:
