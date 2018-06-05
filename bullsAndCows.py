@@ -31,7 +31,7 @@ def buildBoard():
     else:
         Sprite(whiteCircle,(BOX_SIZE*9,BOX_SIZE*.1))
     
-    #score
+    #displays score
     Sprite(TextAsset('Black: '+str(scoreList[0])+' White: '+str(scoreList[1])),(BOX_SIZE*8.2,BOX_SIZE*1.5))  
     
     #detects where mouse clicks, decides if it's legal, and calls flips
@@ -211,7 +211,9 @@ def winner():
             else:
                 Sprite(TextAsset("Tie Game",style='bold 40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*5))
 
+
 if __name__ == '__main__':
+    #empty spaces are '', don't ask why I didn't just make them 0: it's too late now
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
     scoreList = [2,2] #first number is count of black pieces, second is count of white
     data = {}
