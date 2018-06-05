@@ -47,15 +47,16 @@ def mouseClick(event):
     
     #if any of the pieces flipped, it's a legal move so update board and switch players
     if flipped == True:
-        pieceList[clickRow][clickCol] = data['player']
-        data['player'] = 3 - data['player']
+        pieceList[clickRow][clickCol] = data['player'] #append clicked piece to list of pieces bc it was legal
+        data['player'] = 3 - data['player']  #this switches the player numbers (because they're 1 and 2)
         data['otherPlayer'] = 3 - data['otherPlayer']
         updateScore()
         redrawAll()
         winner()
 
+
+#calls functions to flip pieces and checks if any pieces did flip
 def flipPieces(row,col):
-    #calls functions to flip pieces
     w = flipWest(row,col)
     e = flipEast(row,col)
     n = flipNorth(row,col)
@@ -67,11 +68,12 @@ def flipPieces(row,col):
     
     if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
         return True
-  
+
+#scans to west of click and if finds piece of same color as player, flips pieces in between  
 def flipWest(row,col):
     status = False
     for i in range(col-1,-1,-1):
-        if pieceList[row][i] == '':
+        if pieceList[row][i] == '': #if there's a blank spot, pieces are not surrounded, so do not flip
             break
         elif pieceList[row][i] == data['player']:
             for j in range(i,col):
@@ -81,6 +83,7 @@ def flipWest(row,col):
             break
     return status
 
+#scans to east and if finds piece of same color as player, flips pieces in between
 def flipEast(row,col):
     status = False
     for i in range(col+1,8):  #from the column after the clicked one to the end
@@ -88,15 +91,16 @@ def flipEast(row,col):
             break
         elif pieceList[row][i] == data['player']:  #if find another of same color
             for j in range(col+1,i):  #check between them
-                if pieceList[row][j] == data['otherPlayer']:
+                if pieceList[row][j] == data['otherPlayer']: #if piece is other color
                     pieceList[row][j] = data['player']  #flip
-                    status = True
+                    status = True #and return True
             break
     return status
 
+#scans to north and if finds piece of same color as player, flips pieces in between
 def flipNorth(row,col):
     status = False
-    for i in range(row-1,-1,-1):
+    for i in range(row-1,-1,-1): #has to go to -1 because python stops before last number
         if pieceList[i][col] == '':
             break
         elif pieceList[i][col] == data['player']:  #if this row has a matching piece above in same column
@@ -107,7 +111,7 @@ def flipNorth(row,col):
             break
     return status
 
-
+#scans to south and if finds piece of same color as player, flips pieces in between
 def flipSouth(row,col):
     status = False
     for i in range(row+1,8):
@@ -121,11 +125,11 @@ def flipSouth(row,col):
             break
     return status
             
-
+#scans to northwest and if finds piece of same color as player, flips pieces in between
 def flipNorthWest(row,col):
     status = False
-    for i in range(1,min(col,row)+1):
-        if pieceList[row-i][col-i] == '':
+    for i in range(1,min(col,row)+1): #min(col,row) because will be travelling on diagonal, must stop before end of board
+        if pieceList[row-i][col-i] == '':  #subtracting same number from row and col = diagonal movement!
             break
         elif pieceList[row-i][col-i] == data['player']:
             for j in range(1,i):
@@ -135,9 +139,10 @@ def flipNorthWest(row,col):
             break
     return status
 
+#scans to southeast and if finds piece of same color as player, flips pieces in between
 def flipSouthEast(row,col):
     status = False
-    for i in range(1,min(8-col,8-row)):
+    for i in range(1,min(7-col,7-row)+1): 
         if pieceList[row+i][col+i] == '':
             break
         elif pieceList[row+i][col+i] == data['player']:
@@ -148,8 +153,7 @@ def flipSouthEast(row,col):
             break
     return status
             
-
-
+#scans to southwest and if finds piece of same color as player, flips pieces in between
 def flipSouthWest(row,col):
     status = False
     for i in range(1,min(col,7-row)):
@@ -163,7 +167,7 @@ def flipSouthWest(row,col):
             break
     return status
        
-       
+#scans to northeast and if finds piece of same color as player, flips pieces in between       
 def flipNorthEast(row,col):
     status = False
     for i in range(1,min(8-col,row)):
@@ -177,39 +181,41 @@ def flipNorthEast(row,col):
             break
     return status
     
+#counts number of black and white pieces and stores in list
 def updateScore():
     black = 0
     white = 0
-    for row in pieceList:
+    for row in pieceList: #have to look at each row because can't count directly from matrix
         black += row.count(1)
         white += row.count(2)
     scoreList[0] = black
     scoreList[1] = white
 
+#destroys all graphics and restores them again, like a phoenix rising from the ashes
 def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
     
     buildBoard()
 
+#checks for empty spaces, if finds none, game is over so returns winner
 def winner():
-    for row in pieceList:
-        for col in row:
-            if col == '':
+    for row in pieceList: #it's a matrix so have to look at individual lists within the big list
+        if row.count('') > 0:
                 break
-            elif row == 7:
-                if scoreList[0] > scoreList[1]:
-                    Sprite(TextAsset("Black Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
-                elif scoreList[0] < scoreList[1]:
-                    Sprite(TextAsset("White Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
-                else:
-                    Sprite(TextAsset("Tie Game",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+        elif row == 7:
+            if scoreList[0] > scoreList[1]:
+                Sprite(TextAsset("Black Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+            elif scoreList[0] < scoreList[1]:
+                Sprite(TextAsset("White Wins!",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
+            else:
+                Sprite(TextAsset("Tie Game",style='bold 40pt Times'),(BOX_SIZE*9,BOX_SIZE*.7))
 
 if __name__ == '__main__':
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
-    scoreList = [2,2]
+    scoreList = [2,2] #first number is count of black pieces, second is count of white
     data = {}
-    data['player'] = 1
+    data['player'] = 1  #called black pieces 1 and white pieces 2 for ease of working with them
     data['otherPlayer'] = 2
     
     green = Color(0x00FF00, 1)
