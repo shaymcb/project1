@@ -194,7 +194,15 @@ def redrawAll():
 
 def winner():
     for i in range(8):
-        if i 
+        if pieceList[i].count('') > 0:
+            break
+        elif i == 7:
+            if scoreList[0] > scoreList[1]:
+                Sprite(TextAsset('Black Wins!',style = '40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*4))
+            elif scoreList[0] < scoreList[1]:
+                Sprite(TextAsset('White Wins!',style = '40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*4))
+            else:
+                Sprite(TextAsset('Tie Game',style = '40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*4))
 
 if __name__ == '__main__':
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
