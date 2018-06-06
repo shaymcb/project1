@@ -2,12 +2,6 @@
 #23May2018
 #othello.py
 
-#add a sign for whose turn it is
-#add an endgame
-#add comments
-#"winner" function
-#what is point of "flipPieces function
-
 from ggame import *
 
 BOX_SIZE = 70
@@ -44,17 +38,16 @@ def mouseClick(event):
     
     flipped = flipPieces(clickRow,clickCol)
     
-    if flipped == True:
-        pieceList[clickRow][clickCol] = data['player']
+    if flipped == True: #only is legal move if a piece flips
+        pieceList[clickRow][clickCol] = data['player']  #update list with clicked piece
         data['player'] = 3 - data['player']  #switches players bc called them 1 and 2
         data['otherPlayer'] = 3 - data['otherPlayer']
         updateScore()
         redrawAll()
         winner()
 
-  
+#calls functions to flip pieces and returns true if any flipped
 def flipPieces(row,col)  
-    #calls functions to flip pieces
     w = flipWest(row,col)
     e = flipEast(row,col)
     n = flipNorth(row,col)
@@ -211,10 +204,11 @@ def winner():
                 Sprite(TextAsset('Tie Game',style = '40pt Times'),(BOX_SIZE*8.2,BOX_SIZE*4))
 
 if __name__ == '__main__':
+    #idk why i did blank spaces as '' and not 0 but it's too late now
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
     scoreList = [2,2]
     data = {}
-    data['player'] = 1
+    data['player'] = 1  #1 is black and 2 is white
     data['otherPlayer'] = 2
     
     green = Color(0x00FF00, 1)
