@@ -6,7 +6,7 @@ from ggame import *
 
 BOX_SIZE = 70
 
-#displays board, score, and current pieces in list
+#generates graphics for board, score, and current layout of pieces in list
 def buildBoard():
     #board and pieces
     for row in range(8):
@@ -17,7 +17,7 @@ def buildBoard():
             elif pieceList[row][col] == 2:  
                 Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
     
-    #pieces            
+    #current turn            
     Sprite(TextAsset('Turn:'),(BOX_SIZE*8.2,BOX_SIZE*.4))
     if data['player'] == 1:
         Sprite(blackCircle,(BOX_SIZE*9,BOX_SIZE*.1))
@@ -27,7 +27,7 @@ def buildBoard():
     #score
     Sprite(TextAsset('Black: '+str(scoreList[0])+' White: '+str(scoreList[1])),(BOX_SIZE*8.2,BOX_SIZE*1.5))  
     
-    #detects where mouse clicks, decides if it's legal, and calls flips
+#detects where mouse clicks, decides if it's legal, and calls flips
 def mouseClick(event):
     #converts mouse x and y into columns and rows
     clickCol = int(event.x//BOX_SIZE)
@@ -47,7 +47,7 @@ def mouseClick(event):
         winner()
 
 #calls functions to flip pieces and returns true if any flipped
-def flipPieces(row,col)  
+def flipPieces(row,col):  
     w = flipWest(row,col)
     e = flipEast(row,col)
     n = flipNorth(row,col)
