@@ -14,12 +14,11 @@ BOX_SIZE = 70
 
 #displays board, score, and current pieces in list
 def buildBoard():
-    #board
+    #board and pieces
     for row in range(8):
-        L = []
         for col in range(8):
             Sprite(box,(col*BOX_SIZE,row*BOX_SIZE))
-            if pieceList[row][col] == 1:
+            if pieceList[row][col] == 1: #pieces: checks each place for piece and places accordingly
                 Sprite(blackCircle,(col*BOX_SIZE,row*BOX_SIZE))
             elif pieceList[row][col] == 2:  
                 Sprite(whiteCircle,(col*BOX_SIZE,row*BOX_SIZE))
@@ -43,25 +42,31 @@ def mouseClick(event):
     if clickRow > 7 or clickCol > 7 or pieceList[clickRow][clickCol] != '': #breaks if illegal move
         return False
     
-    #calls functions to flip pieces
-    w = flipWest(clickRow,clickCol)
-    e = flipEast(clickRow,clickCol)
-    n = flipNorth(clickRow,clickCol)
-    s = flipSouth(clickRow,clickCol)
-    nw = flipNorthWest(clickRow,clickCol)
-    se = flipSouthEast(clickRow,clickCol)
-    ne = flipNorthEast(clickRow,clickCol)
-    sw = flipSouthWest(clickRow,clickCol)
+    flipped = flipPieces(clickRow,clickCol)
     
-    #if any of the pieces flipped, it's a legal move so update board and switch players
-    if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:
+    if flipped == True:
         pieceList[clickRow][clickCol] = data['player']
-        data['player'] = 3 - data['player']
+        data['player'] = 3 - data['player']  #switches players bc called them 1 and 2
         data['otherPlayer'] = 3 - data['otherPlayer']
         updateScore()
         redrawAll()
         winner()
 
+  
+def flipPieces(row,col)  
+    #calls functions to flip pieces
+    w = flipWest(row,col)
+    e = flipEast(row,col)
+    n = flipNorth(row,col)
+    s = flipSouth(row,col)
+    nw = flipNorthWest(row,col)
+    se = flipSouthEast(row,col)
+    ne = flipNorthEast(row,col)
+    sw = flipSouthWest(row,col)
+    
+    #if any of the pieces flipped, it's a legal move
+    if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:  
+        return True
   
 def flipWest(row,col):
     status = False
@@ -83,7 +88,7 @@ def flipEast(row,col):
             break
         elif pieceList[row][i] == data['player']:  #if find another of same color
             for j in range(col+1,i):  #check between them
-                if pieceList[row][j] == data['otherPlayer']:
+                if pieceList[row][j] == data['otherPlayer']: #if other color
                     pieceList[row][j] = data['player']  #flip
                     status = True
             break
@@ -91,7 +96,7 @@ def flipEast(row,col):
 
 def flipNorth(row,col):
     status = False
-    for i in range(row-1,-1,-1):
+    for i in range(row-1,-1,-1): #put -1 because python stops before last number
         if pieceList[i][col] == '':
             break
         elif pieceList[i][col] == data['player']:  #if this row has a matching piece above in same column
@@ -188,17 +193,8 @@ def redrawAll():
     buildBoard()
 
 def winner():
-    for row in pieceList:
-        for col in row:
-            if col == '':
-                break
-            elif row == 7:
-                if scoreList[0] > scoreList[1]:
-                    print('Black Wins!')
-                elif scoreList[0] < scoreList[1]:
-                    print('White Wins!')
-                else:
-                    print('Tie Game!')
+    for i in range(8):
+        if i 
 
 if __name__ == '__main__':
     pieceList = [['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', 2, 1, '', '', ''], ['', '', '', 1, 2, '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', ''], ['', '', '', '', '', '', '', '']]
