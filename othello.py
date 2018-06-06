@@ -127,8 +127,8 @@ def flipSouth(row,col):
 #scans northwest of clicked box and if finds piece of same color, flips between
 def flipNorthWest(row,col):
     status = False
-    for i in range(1,min(col,row)+1): 
-        if pieceList[row-i][col-i] == '': #subtracting 
+    for i in range(1,min(col,row)+1): #min(col,row) to stay within board
+        if pieceList[row-i][col-i] == '': #subtracting same number from each = diagonal
             break
         elif pieceList[row-i][col-i] == data['player']:
             for j in range(1,i):
@@ -138,6 +138,7 @@ def flipNorthWest(row,col):
             break
     return status
 
+#scans southeast of clicked box and if finds piece of same color, flips between
 def flipSouthEast(row,col):
     status = False
     for i in range(1,min(8-col,8-row)):
@@ -151,8 +152,7 @@ def flipSouthEast(row,col):
             break
     return status
             
-
-
+#scans southwest of clicked box and if finds piece of same color, flips between
 def flipSouthWest(row,col):
     status = False
     for i in range(1,min(col,7-row)):
@@ -166,7 +166,7 @@ def flipSouthWest(row,col):
             break
     return status
        
-       
+#scans northeast of clicked box and if finds piece of same color, flips between   
 def flipNorthEast(row,col):
     status = False
     for i in range(1,min(8-col,row)):
@@ -179,7 +179,8 @@ def flipNorthEast(row,col):
                     status = True
             break
     return status
-    
+
+#counts number of black and white pieces and stores in list
 def updateScore():
     black = 0
     white = 0
@@ -189,12 +190,14 @@ def updateScore():
     scoreList[0] = black
     scoreList[1] = white
 
+#destroys all graphics then calls buildBoard() to regenerate them
 def redrawAll():
     for item in App().spritelist[:]:
         item.destroy()
     
     buildBoard()
 
+#determines if the board is full. if it is, declares winner
 def winner():
     for i in range(8):
         if pieceList[i].count('') > 0:
