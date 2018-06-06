@@ -68,6 +68,7 @@ def flipPieces(row,col)
     if w == True or e == True or n == True or s == True or nw == True or se == True or ne == True or sw == True:  
         return True
   
+#scans west of clicked box and if finds piece of same color, flips between
 def flipWest(row,col):
     status = False
     for i in range(col-1,-1,-1):
@@ -81,6 +82,7 @@ def flipWest(row,col):
             break
     return status
 
+#scans east of clicked box and if finds piece of same color, flips between
 def flipEast(row,col):
     status = False
     for i in range(col+1,8):  #from the column after the clicked one to the end
@@ -94,6 +96,7 @@ def flipEast(row,col):
             break
     return status
 
+#scans north of clicked box and if finds piece of same color, flips between
 def flipNorth(row,col):
     status = False
     for i in range(row-1,-1,-1): #put -1 because python stops before last number
@@ -107,7 +110,7 @@ def flipNorth(row,col):
             break
     return status
 
-
+#scans south of clicked box and if finds piece of same color, flips between
 def flipSouth(row,col):
     status = False
     for i in range(row+1,8):
@@ -121,11 +124,11 @@ def flipSouth(row,col):
             break
     return status
             
-
+#scans northwest of clicked box and if finds piece of same color, flips between
 def flipNorthWest(row,col):
     status = False
-    for i in range(1,min(col,row)+1):
-        if pieceList[row-i][col-i] == '':
+    for i in range(1,min(col,row)+1): 
+        if pieceList[row-i][col-i] == '': #subtracting 
             break
         elif pieceList[row-i][col-i] == data['player']:
             for j in range(1,i):
